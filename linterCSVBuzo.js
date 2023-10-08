@@ -42,7 +42,7 @@ fs.readFile('archivo.txt', 'utf8', (err, data) => {
         for(let j=0;j<renglones[i].length;j++){
         letra=renglones[i].charAt(j).toLowerCase();   
         if(caracteresAlfanumericos.includes(letra)){
-                
+                console.log("Si es alfanumerico");
         }
                
                
