@@ -1,5 +1,11 @@
 # lenguajes1Buzo
-Buzo Zamora Elian
-20760257
-5SS
-Lenguajes y Automatas I Tareas de clase.
+Es necesario contar con NODE.JS instalado para poder realizar las pruebas
+del programa.
+Abrimos la linea de comandos (teniendo carpeta abierta del proyecto).
+Y escribimos
+
+--> node
+
+Hacemos enter.
+
+luego escribimos --> .load app.js

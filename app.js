@@ -38,7 +38,7 @@ fs.readFile('archivo.txt', 'utf8', (err, data) => {
     //Este for recorre cada uno de los renglones de la data.
 for(let i=1;i<=contarSaltosDeLinea;i++){ 
     divisionDatos=""; //varialbe que se reiniciara cada iteracion del bucle for
-    divisionSubDatos="";    //Por cada renglon va a contar cuantas columnas de datos tiene
+    divisionDatosTrim="";    //Por cada renglon va a contar cuantas columnas de datos tiene
     //---------------------------------------------------------------------------------------------
      divisionColumnasEntrada=renglones[i].split(",");           //separador de datos ingresados  
      contadorColumnasEntrada=divisionColumnasEntrada.length-1;  //contador de datos ingresados
@@ -55,19 +55,17 @@ for(let i=1;i<=contarSaltosDeLinea;i++){
         }
         
     //------------------------------------------------------------------------------------------
+
     //VALIDAR SI LAS COLUMNAS TIENEN DATOS
         /*Usaremos el método trim() que nos permitirá
         retirar las cadenas de caracters vacias " " 
         al principio y el final de un texto. */
-        divisionDatos = renglones[i].split(","); //separador de datos del topColumnas
+        divisionDatos = renglones[i].split(","); //separador de cada dato de un renglon
         for(let k=0;k<contadorColumnasEntrada;k++){
-            divisionDatosTrim=divisionDatos[k].trim();
-            if(divisionDatosTrim==""){
-                console.log("esta vacia")
-            }else{
-                //No esta vacia
-                console.log(divisionDatosTrim);
-            }
+            divisionDatosTrim=divisionDatos[k].trim(); //retirar posibles vacios en texto
+                if(divisionDatosTrim==""){
+                    console.log("Al renglon "+i+" Le faltan datos del campo: "+divisionColumnas[k])
+                }
         }
 
 
