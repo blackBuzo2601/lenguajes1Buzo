@@ -22,13 +22,14 @@ fs.readFile('archivo.txt', 'utf8', (err, data) => {
     const contadorColumnas = divisionColumnas.length-1; //contador de campos de informacion
     var caracteresAlfanumericos="abcdefghijklmnopqrstuvwxyz0123456789";
     var letra;
-    
+    var divisionColumnasEntrada;
+    var contadorColumnasEntrada
 
     for(let i=1;i<=renglones.length;i++){ //ciclo for general que recorrera cada uno de los renglones
         //empieza en el renglon 1 puesto que el 0 es el de el tipo de dato.
 
-    var divisionColumnasEntrada=renglones[i].split(",");            //separador de datos ingresados
-    var contadorColumnasEntrada=divisionColumnasEntrada.length-1;   //contador de datos ingresados
+     divisionColumnasEntrada=renglones[i].split(",");            //separador de datos ingresados
+     contadorColumnasEntrada=divisionColumnasEntrada.length-1;   //contador de datos ingresados
 
 
     //VALIDAR SI LOS RENGLONES TIENEN LA MISMA CANTIDAD DE COLUMNAS QUE EL TopColumnas
