@@ -29,7 +29,7 @@ fs.readFile('archivo.txt', 'utf8', (err, data) => {
     var divisionColumnasEntrada;    
     var contadorColumnasEntrada;
     var divisionDatos;
-    var divisionSubDatos;
+    var divisionDatosTrim;
     //CONTAR CUANTOS RENGLONES DE DATOS SON después del topColumnas
     var contarSaltosDeLinea=renglones.length-1; //contar lineas despues del topColumnas
 
@@ -59,10 +59,15 @@ for(let i=1;i<=contarSaltosDeLinea;i++){
         /*Usaremos el método trim() que nos permitirá
         retirar las cadenas de caracters vacias " " 
         al principio y el final de un texto. */
-          
+        divisionDatos = renglones[i].split(","); //separador de datos del topColumnas
         for(let k=0;k<contadorColumnasEntrada;k++){
-             divisionDatos = renglones[i].split(","); //separador de datos del topColumnas
-             divisionDatos[0]=e;
+            divisionDatosTrim=divisionDatos[k].trim();
+            if(divisionDatosTrim==""){
+                console.log("esta vacia")
+            }else{
+                //No esta vacia
+                console.log(divisionDatosTrim);
+            }
         }
 
 
