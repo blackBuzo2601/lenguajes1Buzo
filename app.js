@@ -15,17 +15,26 @@ fs.readFile('archivo.txt', 'utf8', (err, data) => {
         console.error(err);
         return;
     }
-    
-    var renglones = data.split('\n'); //usamos el salto de linea para definir cada renglon
-    const topColumnas = renglones[0]; //almacena los datos generales por el primer renglon
-    const divisionColumnas = topColumnas.split(","); //separador de datos del topColumnas
-    const contadorColumnas = divisionColumnas.length-1; //contador de campos de informacion
-    var caracteresAlfanumericos="abcdefghijklmnopqrstuvwxyz0123456789";
-    var letra;
-    var divisionColumnasEntrada;
-    var contadorColumnasEntrada
 
-    for(let i=1;i<=renglones.length;i++){ //ciclo for general que recorrera cada uno de los renglones
+    var renglones = data.split('\n'); //separa toda la informacion en base saltos de linea
+    const topColumnas = renglones[0]; //almacena la primer linea correspondiente a los campos
+    const divisionColumnas = topColumnas.split(","); //separa la informacion (campos) de topColumnas
+    const contadorColumnas = divisionColumnas.length-1; //contador de campos de informacion
+
+
+    var caracteresAlfanumericos="abcdefghijklmnopqrstuvwxyz0123456789"; //caracteres alfanumericos para evaluar
+    var letra;                      //caracter que compararemos con caracteresAlfanumericos
+
+    //inicializacion de variables extra que me serviran
+    var divisionColumnasEntrada;    
+    var contadorColumnasEntrada;
+
+    //CONTAR CUANTOS RENGLONES DE DATOS SON después del topColumnas
+    var contarSaltosDeLinea=renglones.length-1; //contar lineas despues del topColumnas
+   
+
+
+    for(let i=1;i<=contarSaltosDeLinea;i++){ //ciclo for general que recorrera cada uno de los renglones
     divisionDatos=""; //varialbe que se reiniciara cada iteracion del bucle for
 
     //Por cada renglon va a contar cuantas columnas de datos tiene
@@ -49,10 +58,11 @@ fs.readFile('archivo.txt', 'utf8', (err, data) => {
         retirar las cadenas de caracters vacias " " 
         al principio y el final de un texto. */
         //--------------------------------------------------------------------------
-        for(let k=0;k<contadorColumnasEntrada;k++){
-            const divisionDatos = renglones[i].split(","); //separador de datos del topColumnas
-            console.log(divisionDatos);
-        }
+        
+        //for(let k=0;k<contadorColumnasEntrada;k++){
+          //  const divisionDatos = renglones[i].split(","); //separador de datos del topColumnas
+            //console.log(divisionDatos);
+       // }
 
 /*Documentare esto por mientras porque se que me servira
          //evaluar si es alfanumerico
