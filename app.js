@@ -28,41 +28,43 @@ fs.readFile('archivo.txt', 'utf8', (err, data) => {
     //inicializacion de variables extra que me serviran
     var divisionColumnasEntrada;    
     var contadorColumnasEntrada;
-
+    var divisionDatos;
+    var divisionSubDatos;
     //CONTAR CUANTOS RENGLONES DE DATOS SON después del topColumnas
     var contarSaltosDeLinea=renglones.length-1; //contar lineas despues del topColumnas
-   
 
-
-    for(let i=1;i<=contarSaltosDeLinea;i++){ //ciclo for general que recorrera cada uno de los renglones
+    //-------------------------------------------------------------------------------------------
+    //CICLO FOR GENERAL
+    //Este for recorre cada uno de los renglones de la data.
+for(let i=1;i<=contarSaltosDeLinea;i++){ 
     divisionDatos=""; //varialbe que se reiniciara cada iteracion del bucle for
-
-    //Por cada renglon va a contar cuantas columnas de datos tiene
+    divisionSubDatos="";    //Por cada renglon va a contar cuantas columnas de datos tiene
     //---------------------------------------------------------------------------------------------
      divisionColumnasEntrada=renglones[i].split(",");           //separador de datos ingresados  
      contadorColumnasEntrada=divisionColumnasEntrada.length-1;  //contador de datos ingresados
     //---------------------------------------------------------------------------------------------
-
+    
 
     //VALIDAR SI LOS RENGLONES TIENEN LA MISMA CANTIDAD DE COLUMNAS QUE EL TopColumnas
         if(contadorColumnasEntrada==contadorColumnas){ 
-        console.log("El renglon "+i+" si tiene la misma cantidad de columnas");
+        console.log("El renglon ("+i+") SI tiene la misma cantidad de columnas");
         }
         if(contadorColumnasEntrada!=contadorColumnas){
-            console.log("El renglon "+i+" no tiene la misma cantidad de columnas");
+            console.log("El renglon ("+i+") NO tiene la misma cantidad de columnas");
             //guardar el log en un archivo
         }
         
-        //VALIDAR SI LAS COLUMNAS TIENEN DATOS
+    //------------------------------------------------------------------------------------------
+    //VALIDAR SI LAS COLUMNAS TIENEN DATOS
         /*Usaremos el método trim() que nos permitirá
         retirar las cadenas de caracters vacias " " 
         al principio y el final de un texto. */
-        //--------------------------------------------------------------------------
-        
-        //for(let k=0;k<contadorColumnasEntrada;k++){
-          //  const divisionDatos = renglones[i].split(","); //separador de datos del topColumnas
-            //console.log(divisionDatos);
-       // }
+          
+        for(let k=0;k<contadorColumnasEntrada;k++){
+             divisionDatos = renglones[i].split(","); //separador de datos del topColumnas
+             divisionDatos[0]=e;
+        }
+
 
 /*Documentare esto por mientras porque se que me servira
          //evaluar si es alfanumerico
