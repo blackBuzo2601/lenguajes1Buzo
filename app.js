@@ -26,10 +26,13 @@ fs.readFile('archivo.txt', 'utf8', (err, data) => {
     var contadorColumnasEntrada
 
     for(let i=1;i<=renglones.length;i++){ //ciclo for general que recorrera cada uno de los renglones
-        //empieza en el renglon 1 puesto que el 0 es el de el tipo de dato.
+    divisionDatos=""; //varialbe que se reiniciara cada iteracion del bucle for
 
-     divisionColumnasEntrada=renglones[i].split(",");            //separador de datos ingresados
-     contadorColumnasEntrada=divisionColumnasEntrada.length-1;   //contador de datos ingresados
+    //Por cada renglon va a contar cuantas columnas de datos tiene
+    //---------------------------------------------------------------------------------------------
+     divisionColumnasEntrada=renglones[i].split(",");           //separador de datos ingresados  
+     contadorColumnasEntrada=divisionColumnasEntrada.length-1;  //contador de datos ingresados
+    //---------------------------------------------------------------------------------------------
 
 
     //VALIDAR SI LOS RENGLONES TIENEN LA MISMA CANTIDAD DE COLUMNAS QUE EL TopColumnas
@@ -40,22 +43,34 @@ fs.readFile('archivo.txt', 'utf8', (err, data) => {
             console.log("El renglon "+i+" no tiene la misma cantidad de columnas");
             //guardar el log en un archivo
         }
-
-        //evaluar si es alfanumerico
-        for(let j=0;j<renglones[i].length;j++){
-        letra=renglones[i].charAt(j).toLowerCase();   
-        if(caracteresAlfanumericos.includes(letra)){
-                console.log("Si es alfanumerico");
-        }else{
-            
-        }
-               
-               
-                     
-        }
         
-       
-    }//fin for general
-});
+        //VALIDAR SI LAS COLUMNAS TIENEN DATOS
+        /*Usaremos el método trim() que nos permitirá
+        retirar las cadenas de caracters vacias " " 
+        al principio y el final de un texto. */
+        //--------------------------------------------------------------------------
+        for(let k=0;k<contadorColumnasEntrada;k++){
+            const divisionDatos = renglones[i].split(","); //separador de datos del topColumnas
+            console.log(divisionDatos);
+        }
 
+/*Documentare esto por mientras porque se que me servira
+         //evaluar si es alfanumerico
+         for(let j=0;j<renglones[i].length;j++){
+            letra=renglones[i].charAt(j).toLowerCase();   
+            if(caracteresAlfanumericos.includes(letra)){
+                    console.log("Si es alfanumerico");
+            }else{
+                
+            }
+                              
+            }
+       */
+
+        
+    }//fin for general
+
+    
+});
+ 
 //debo investigar que guarde en un archivo los logs.
