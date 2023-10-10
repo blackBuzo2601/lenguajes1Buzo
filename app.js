@@ -24,14 +24,16 @@ fs.readFile('archivo.txt', 'utf8', (err, data) => {
 
 
     var caracteresAlfanumericos="abcdefghijklmnopqrstuvwxyz0123456789"; //caracteres alfanumericos
+    var caracteresNumericos="1234567890";                                 //caracteres numericos
     var letra;                      //caracter que compararemos con caracteresAlfanumericos
-
+    var numero;                     //numero que compararemos con caracteresNumericos
     //inicializacion de variables extra que me serviran
     var divisionColumnasEntrada;    
     var contadorColumnasEntrada;
     var divisionDatos;
     var divisionDatosTrim;
     var esAlfanumerico=0; 
+    var esNumerico=0;
 
     //Contador de renglones después del renglon 0 (el de los campos)
     var contarSaltosDeLinea=renglones.length-1; //-1 para excluir el topColumnas
@@ -39,6 +41,7 @@ fs.readFile('archivo.txt', 'utf8', (err, data) => {
     //CICLO FOR GENERAL
     //Este for recorre cada uno de los renglones de la data.
 for(let i=1;i<=contarSaltosDeLinea;i++){ 
+    console.log("\nRENGLON NUMERO: "+i+"\n");
     divisionDatos=""; //variable que se reiniciara cada iteracion del bucle for
     divisionDatosTrim="";    //Por cada renglon va a contar cuantas columnas de datos tiene
     //---------------------------------------------------------------------------------------------
@@ -75,7 +78,8 @@ for(let i=1;i<=contarSaltosDeLinea;i++){
         divisionDatosTrim="";
         divisionDatos="";
         divisionDatos = renglones[i].split(","); //separar cada dato del renglon actual.
-        
+    
+
         //EVALUAR QUE EL NICKNAME SEA ALFANUMERICO
         //-----------------------------------------------------------------------------------------------------------
          for(let j=0;j<divisionDatos[0].length;j++){ //el bucle for revisara cada letra del nickname
@@ -90,12 +94,33 @@ for(let i=1;i<=contarSaltosDeLinea;i++){
             console.log("El nickname: "+divisionDatos[0]+" SI es alfanumerico");
         }else{
             console.log("El nickname: "+divisionDatos[0]+" NO es alfanumerico");
+            //agregar al LOG el que no cumple con lo especificado
         }
         //------------------------------------------------------------------------------------------------------------
         
+        //Reiniciar variables para volver a trabajar con ellas
+        divisionDatosTrim="";
+        divisionDatos="";
+        divisionDatos = renglones[i].split(","); //separar cada dato del renglon actual.
+        esNumerico=0;
+        //EVALUAR QUE LA MATRICULA SEA NUMERICA
+        for(j=0;j<divisionDatos[1].length;j++){ //el bucle for revisara cada letra de matricula
+            numero=divisionDatos[1].charAt(j); //almacenar cada uno de los digitos de la matricula
+            if(caracteresNumericos.includes(numero)){
+                    //no realizar nada pues xd
+            }else{
+                  esNumerico++ //si vale de 1 en adelante, significa que contiene caracteres especiales, por lo que no es alfanumerico
+            }
+        }
+        if(esNumerico==0){
+            console.log("La matricula: "+divisionDatos[1]+" SI es NUMERICA");
+        }else{
+            console.log("La matricula: "+divisionDatos[1]+" NO es NUMERICA");
+            //agregar al LOG el que no cumple con lo especificado
+        }
 
 
-        
+
     }//fin for general
     
     
