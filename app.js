@@ -24,7 +24,7 @@ fs.readFile('archivo.txt', 'utf8', (err, data) => {
 
 
     const caracteresAlfanumericos="abcdefghijklmnopqrstuvwxyz0123456789"; //caracteres alfanumericos
-    const caracteresNumericos="1234567890";                                 //caracteres numericos
+    const caracteresNumericos="1234567890.";                                 //caracteres numericos
     const caracteresNormales="abcdefghijklmnopqrstuvwxyz"                   //caracteres normales
     var letra;                      //caracter que compararemos con caracteresAlfanumericos Y caracteresNormales
     var numero;                     //numero que compararemos con caracteresNumericos
@@ -170,7 +170,42 @@ for(let i=1;i<=contarSaltosDeLinea;i++){
             console.log("La carrera: "+divisionDatos[3]+" No es de tipo STRING");
             //agregar al LOG el que no cumple con lo especificado
         }
-        
+        //------------------------------------------------------------------------------------------------------------
+
+        //Reiniciar variables pero esta vez por medio de una función.
+        function reiniciarVariables(){
+        divisionDatosTrim="";
+        divisionDatos="";
+        divisionDatos = renglones[i].split(","); //separar cada dato del renglon actual.
+        esNumerico=0;
+        esAlfanumerico=0;
+        }
+        reiniciarVariables(); //Llamando a la función para reiniciar variables y trabajar con ellas.
+
+        //EVALUAR QUE EL PROMEDIO SEA NUMERICO
+        for(j=0;j<divisionDatos[4].length;j++){ //el bucle for revisara cada letra de matricula
+            numero=divisionDatos[4].charAt(j); //almacenar cada uno de los digitos de la matricula
+            if(caracteresNumericos.includes(numero)){
+                    //no realizar nada pues xd
+            }else{
+                  esNumerico++ //si vale de 1 en adelante, significa que contiene caracteres especiales, por lo que no es alfanumerico
+            }
+        }
+        if(divisionDatos[4].charAt(divisionDatos[4].length-1)=="."){ //evalua si el ultimo caracter de promedio es un ".", si es asi, no es un
+                                                                    //valor numerico valido.
+            esNumerico++;
+        }
+        if(esNumerico==0){
+            console.log("El promedio: "+divisionDatos[4]+" SI es NUMERICO");
+        }else{
+            console.log("El promedio: "+divisionDatos[4]+" NO es NUMERICO");
+            //agregar al LOG el que no cumple con lo especificado
+        }
+
+
+
+
+
 
     }//fin for general
     
