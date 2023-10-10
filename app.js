@@ -25,6 +25,7 @@ fs.readFile('archivo.txt', 'utf8', (err, data) => {
 
     const caracteresAlfanumericos="abcdefghijklmnopqrstuvwxyz0123456789"; //caracteres alfanumericos
     const caracteresNumericos="1234567890.";                                 //caracteres numericos
+    const caracteresNumericosENTEROS="123456789";                           //SOLO ENTEROS
     const caracteresNormales="abcdefghijklmnopqrstuvwxyz"                   //caracteres normales
     var letra;                      //caracter que compararemos con caracteresAlfanumericos Y caracteresNormales
     var numero;                     //numero que compararemos con caracteresNumericos
@@ -201,9 +202,28 @@ for(let i=1;i<=contarSaltosDeLinea;i++){
             console.log("El promedio: "+divisionDatos[4]+" NO es NUMERICO");
             //agregar al LOG el que no cumple con lo especificado
         }
+        //-----------------------------------------------------------------------------------------------------
+        
+        reiniciarVariables(); //Llamando a la función para reiniciar variables y trabajar con ellas.
 
-
-
+        //VALIDAR QUE EDAD SEA NUMERICO ENTERO
+        for(j=0;j<divisionDatos[5].length;j++){ //el bucle for revisara cada letra de matricula
+            numero=divisionDatos[5].charAt(j); //almacenar cada uno de los digitos de la matricula
+            if(caracteresNumericosENTEROS.includes(numero)){
+                    //no realizar nada pues xd
+            }else{
+                  esNumerico++ //si vale de 1 en adelante, significa que contiene caracteres especiales, por lo que no es alfanumerico
+            }
+        }
+        if(esNumerico==0){
+            console.log("La edad: "+divisionDatos[5]+" SI es Numerica Entera");
+        }else{
+            console.log("La edad: "+divisionDatos[5]+" NO es Numerica Entera");
+            //agregar al LOG el que no cumple con lo especificado
+        }
+        //---------------------------------------------------------------------------------------------------------
+        
+        reiniciarVariables(); //Llamando a la función para reiniciar variables y trabajar con ellas.
 
 
 
