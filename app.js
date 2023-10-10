@@ -23,9 +23,10 @@ fs.readFile('archivo.txt', 'utf8', (err, data) => {
     const contadorColumnas = divisionColumnas.length-1; //contador de campos de informacion
 
 
-    var caracteresAlfanumericos="abcdefghijklmnopqrstuvwxyz0123456789"; //caracteres alfanumericos
-    var caracteresNumericos="1234567890";                                 //caracteres numericos
-    var letra;                      //caracter que compararemos con caracteresAlfanumericos
+    const caracteresAlfanumericos="abcdefghijklmnopqrstuvwxyz0123456789"; //caracteres alfanumericos
+    const caracteresNumericos="1234567890";                                 //caracteres numericos
+    const caracteresNormales="abcdefghijklmnopqrstuvwxyz"                   //caracteres normales
+    var letra;                      //caracter que compararemos con caracteresAlfanumericos Y caracteresNormales
     var numero;                     //numero que compararemos con caracteresNumericos
     //inicializacion de variables extra que me serviran
     var divisionColumnasEntrada;    
@@ -116,6 +117,30 @@ for(let i=1;i<=contarSaltosDeLinea;i++){
             console.log("La matricula: "+divisionDatos[1]+" SI es NUMERICA");
         }else{
             console.log("La matricula: "+divisionDatos[1]+" NO es NUMERICA");
+            //agregar al LOG el que no cumple con lo especificado
+        }
+        //-------------------------------------------------------------------------------------------------------------------------------
+
+        //Reiniciar variables para volver a trabajar con ellas
+        divisionDatosTrim="";
+        divisionDatos="";
+        divisionDatos = renglones[i].split(","); //separar cada dato del renglon actual.
+        esNumerico=0;
+        esAlfanumerico=0;
+
+        //Validar que facultad sea un String
+        for(let j=0;j<divisionDatos[2].length;j++){ //el bucle for revisara cada letra de facultad
+            letra=divisionDatos[2].charAt(j).toLowerCase(); //cambiar a minuscula cada letra por si son mayusculas
+            if(caracteresNormales.includes(letra)){
+                    //no realizar nada pues xd
+            }else{
+                  esAlfanumerico++ //reutilice esta variable puesto que me sirve para saber que se almaceno un caracter diferente del abedecedario pues.
+            }
+        }
+        if(esAlfanumerico==0){ //mismo caso, si vale de 1 en adelante, significa que contiene caracteres no String.
+            console.log("La facultad: "+divisionDatos[2]+" Si es de tipo STRING.");
+        }else{
+            console.log("La facultad: "+divisionDatos[2]+" No es de tipo STRING");
             //agregar al LOG el que no cumple con lo especificado
         }
 
