@@ -31,10 +31,10 @@ fs.readFile('archivo.txt', 'utf8', (err, data) => {
     var contadorColumnasEntrada;
     var divisionDatos;
     var divisionDatosTrim;
+    var esAlfanumerico=0; 
 
     //Contador de renglones después del renglon 0 (el de los campos)
     var contarSaltosDeLinea=renglones.length-1; //-1 para excluir el topColumnas
-
     //-------------------------------------------------------------------------------------------
     //CICLO FOR GENERAL
     //Este for recorre cada uno de los renglones de la data.
@@ -76,19 +76,25 @@ for(let i=1;i<=contarSaltosDeLinea;i++){
         divisionDatos="";
         divisionDatos = renglones[i].split(","); //separar cada dato del renglon actual.
         
-         //EVALUAR QUE EL NICKNAME SEA ALFANUMERICO
+        //EVALUAR QUE EL NICKNAME SEA ALFANUMERICO
+        //-----------------------------------------------------------------------------------------------------------
          for(let j=0;j<divisionDatos[0].length;j++){ //el bucle for revisara cada letra del nickname
             letra=divisionDatos[0].charAt(j).toLowerCase(); //cambiar a minuscula cada letra por si son mayusculas
             if(caracteresAlfanumericos.includes(letra)){
-                    console.log(letra+" es alfanumerico");
+                    //no realizar nada pues xd
             }else{
-                console.log(letra+" no es alfanumerico")
+                  esAlfanumerico++ //si vale de 1 en adelante, significa que contiene caracteres especiales, por lo que no es alfanumerico
             }
-               
-            
-            }
-       
+        }
+        if(esAlfanumerico==0){
+            console.log("El nickname: "+divisionDatos[0]+" SI es alfanumerico");
+        }else{
+            console.log("El nickname: "+divisionDatos[0]+" NO es alfanumerico");
+        }
+        //------------------------------------------------------------------------------------------------------------
         
+
+
         
     }//fin for general
     
