@@ -27,6 +27,8 @@ fs.readFile('archivo.txt', 'utf8', (err, data) => {
     const caracteresNumericos="1234567890.";                                 //caracteres numericos
     const caracteresNumericosENTEROS="123456789";                           //SOLO ENTEROS
     const caracteresNormales="abcdefghijklmnopqrstuvwxyz"                   //caracteres normales
+    const caracteresCorreo="abcdefghijklmnopqrstuvwxyz0123456789@."
+    const arroba="@";
     var letra;                      //caracter que compararemos con caracteresAlfanumericos Y caracteresNormales
     var numero;                     //numero que compararemos con caracteresNumericos
     //inicializacion de variables extra que me serviran
@@ -36,6 +38,7 @@ fs.readFile('archivo.txt', 'utf8', (err, data) => {
     var divisionDatosTrim;
     var esAlfanumerico=0; 
     var esNumerico=0;
+    var unArroba=0;
 
     //Contador de renglones después del renglon 0 (el de los campos)
     var contarSaltosDeLinea=renglones.length-1; //-1 para excluir el topColumnas
@@ -180,12 +183,13 @@ for(let i=1;i<=contarSaltosDeLinea;i++){
         divisionDatos = renglones[i].split(","); //separar cada dato del renglon actual.
         esNumerico=0;
         esAlfanumerico=0;
+        unArroba=0;
         }
         reiniciarVariables(); //Llamando a la función para reiniciar variables y trabajar con ellas.
 
         //EVALUAR QUE EL PROMEDIO SEA NUMERICO
-        for(j=0;j<divisionDatos[4].length;j++){ //el bucle for revisara cada letra de matricula
-            numero=divisionDatos[4].charAt(j); //almacenar cada uno de los digitos de la matricula
+        for(j=0;j<divisionDatos[4].length;j++){ 
+            numero=divisionDatos[4].charAt(j); 
             if(caracteresNumericos.includes(numero)){
                     //no realizar nada pues xd
             }else{
@@ -207,8 +211,8 @@ for(let i=1;i<=contarSaltosDeLinea;i++){
         reiniciarVariables(); //Llamando a la función para reiniciar variables y trabajar con ellas.
 
         //VALIDAR QUE EDAD SEA NUMERICO ENTERO
-        for(j=0;j<divisionDatos[5].length;j++){ //el bucle for revisara cada letra de matricula
-            numero=divisionDatos[5].charAt(j); //almacenar cada uno de los digitos de la matricula
+        for(j=0;j<divisionDatos[5].length;j++){ 
+            numero=divisionDatos[5].charAt(j); 
             if(caracteresNumericosENTEROS.includes(numero)){
                     //no realizar nada pues xd
             }else{
@@ -225,8 +229,31 @@ for(let i=1;i<=contarSaltosDeLinea;i++){
         
         reiniciarVariables(); //Llamando a la función para reiniciar variables y trabajar con ellas.
 
+        //VALIDAR QUE CORREO SEA VALIDO
+        for(j=0;j<divisionDatos[6].length;j++){ 
+            letra=divisionDatos[6].charAt(j);
+            if(caracteresCorreo.includes(letra)){
+                    //no realizar nada pues xd
+            }else{
+                  esNumerico++ //si vale de 1 en adelante, significa que contiene caracteres especiales, por lo que no es alfanumerico
+            }
+            if(arroba.includes(letra)){ //un correo puede tener solo un "@"
+                unArroba++;
+            }
+
+        }
+
+         if(divisionDatos[6].charAt(divisionDatos[6].length-1)=="."){ //un correo no puede terminar en .
+                esNumerico++;
+            }
 
 
+        if(esNumerico==0 && unArroba==1 ){
+            console.log("El correo "+divisionDatos[6]+" SI es válido");
+        }else{
+            console.log("El correo: "+divisionDatos[6]+" NO es válido");
+            //agregar al LOG el que no cumple con lo especificado
+        }
     }//fin for general
     
     
