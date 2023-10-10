@@ -49,7 +49,7 @@ for(let i=1;i<=contarSaltosDeLinea;i++){
      divisionColumnasEntrada=renglones[i].split(",");           //separador de datos ingresados del renglon 1,2,3... 
      contadorColumnasEntrada=divisionColumnasEntrada.length-1;  //contador de datos ingresados del renglon correspondiente
     //---------------------------------------------------------------------------------------------
-    
+    esAlfanumerico=0;
 
     //VALIDAR SI LOS RENGLONES TIENEN LA MISMA CANTIDAD DE COLUMNAS QUE EL TopColumnas (campos requeridos)
     //contadorColumnasEntrada: es la cantidad de datos del renglon evaluado | contadorColumnas: es la cantidad de campos de información 
@@ -128,7 +128,7 @@ for(let i=1;i<=contarSaltosDeLinea;i++){
         esNumerico=0;
         esAlfanumerico=0;
 
-        //Validar que facultad sea un String
+        //VALIDAR QUE FACULTAD SEA UN STRING
         for(let j=0;j<divisionDatos[2].length;j++){ //el bucle for revisara cada letra de facultad
             letra=divisionDatos[2].charAt(j).toLowerCase(); //cambiar a minuscula cada letra por si son mayusculas
             if(caracteresNormales.includes(letra)){
@@ -143,8 +143,34 @@ for(let i=1;i<=contarSaltosDeLinea;i++){
             console.log("La facultad: "+divisionDatos[2]+" No es de tipo STRING");
             //agregar al LOG el que no cumple con lo especificado
         }
+        //------------------------------------------------------------------------------------------------------------------
 
+        //a partir de aqui solo voy a copiar y pegar codigo puesto que: carrera, promedio,edad son de tipo string y numericos
+        //y he realizado trabajado con los dos tipos de datos.
 
+         //Reiniciar variables para volver a trabajar con ellas
+         divisionDatosTrim="";
+         divisionDatos="";
+         divisionDatos = renglones[i].split(","); //separar cada dato del renglon actual.
+         esNumerico=0;
+         esAlfanumerico=0;
+
+         //VALIDAR QUE CARRERA SEA UN STRING
+        for(let j=0;j<divisionDatos[3].length;j++){ //el bucle for revisara cada letra de facultad
+            letra=divisionDatos[3].charAt(j).toLowerCase(); //cambiar a minuscula cada letra por si son mayusculas
+            if(caracteresNormales.includes(letra)){
+                    //no realizar nada pues xd
+            }else{
+                  esAlfanumerico++ //reutilice esta variable puesto que me sirve para saber que se almaceno un caracter diferente del abedecedario pues.
+            }
+        }
+        if(esAlfanumerico==0){ //mismo caso, si vale de 1 en adelante, significa que contiene caracteres no String.
+            console.log("La carrera: "+divisionDatos[3]+" Si es de tipo STRING.");
+        }else{
+            console.log("La carrera: "+divisionDatos[3]+" No es de tipo STRING");
+            //agregar al LOG el que no cumple con lo especificado
+        }
+        
 
     }//fin for general
     
