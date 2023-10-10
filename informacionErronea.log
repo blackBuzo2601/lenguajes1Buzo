@@ -1,0 +1,16 @@
+Del renglon (2) la matricula: 306405s no es numerica
+Del renglon (2) la facultad: licenciatura1 No es de tipo STRING
+Al renglon (3) le faltan datos del campo: facultad
+Al renglon (3) le faltan datos del campo: carrera
+Al renglon (3) le faltan datos del campo: promedio
+Al renglon (3) le faltan datos del campo: edad
+Al renglon (3) le faltan datos del campo: correo
+Del renglon (3) la matricula: alimentos no es numerica
+Del renglon (3) la facultad:   No es de tipo STRING
+Del renglon (3) la carrera:   No es de tipo STRING
+Del renglon (3) el promedio:   No es numerico
+Del renglon (3) la edad:   No es de tipo Entero
+Del renglon (3) el correo:   no es un correo válido
+Del renglon (4) el nickname: alejandro#|  no es alfanumerico
+Del renglon (4) el correo: al306403@uabc@.edu.mx no es un correo válido
+Del renglon (4) la edad: 24.1 No es de tipo Entero

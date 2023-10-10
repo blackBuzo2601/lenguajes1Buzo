@@ -9,3 +9,6 @@ Y escribimos
 Hacemos enter.
 
 luego escribimos --> .load app.js
+
+se almacenara en un archivo de nombre informacionErronea.log la información de los renglones
+que no cumplieron con los requisitos.

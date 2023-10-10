@@ -11,12 +11,7 @@ data: se utiliza para almacenar los datos o el resultado de la operacion
 */
 fs.readFile('archivo.txt', 'utf8', (err, data) => {      
       
-    //No se que hace esto pero supongo que no debo preocuparme por ahorita
-    if(err){
-        console.error(err);
-        return;
-    }
-
+   
     var renglones = data.split('\n'); //separa toda la informacion en base saltos de linea
     const topColumnas = renglones[0]; //almacena la primer linea correspondiente a los campos
     const divisionColumnas = topColumnas.split(","); //separa la informacion (campos) de topColumnas
@@ -39,6 +34,7 @@ fs.readFile('archivo.txt', 'utf8', (err, data) => {
     var esAlfanumerico=0; 
     var esNumerico=0;
     var unArroba=0;
+    var mensaje="";
 
     //Contador de renglones después del renglon 0 (el de los campos)
     var contarSaltosDeLinea=renglones.length-1; //-1 para excluir el topColumnas
@@ -62,7 +58,10 @@ for(let i=1;i<=contarSaltosDeLinea;i++){
         }
         if(contadorColumnasEntrada!=contadorColumnas){
             console.log("El renglon ("+i+") NO tiene la misma cantidad de columnas");
-            //guardar el log en un archivo
+            mensaje = "El renglon ("+i+") NO tiene la misma cantidad de columnas"; //mensaje a almacenar bien
+            fs.appendFile('informacionErronea.log', mensaje + '\n', (err) => {
+                if (err) throw err;
+            });
         }
         
     //------------------------------------------------------------------------------------------
@@ -71,19 +70,26 @@ for(let i=1;i<=contarSaltosDeLinea;i++){
         retirar las cadenas de caracters vacias " " 
         al principio y el final de un texto. */
 
+        mensaje="";
+
         divisionDatos = renglones[i].split(","); //separar cada dato del renglon actual.
         for(let k=0;k<contadorColumnasEntrada;k++){
             divisionDatosTrim=divisionDatos[k].trim(); //retirar los vacios al final e inicio del dato.
                 if(divisionDatosTrim==""){
-                    console.log("Al renglon "+i+" Le faltan datos del campo: "+divisionColumnas[k])
+                    console.log("Al renglon ("+i+") Le faltan datos del campo: "+divisionColumnas[k]);
+                    mensaje = "Al renglon ("+i+") le faltan datos del campo: "+divisionColumnas[k]; //mensaje a almacenar bien
+                    fs.appendFile('informacionErronea.log', mensaje + '\n', (err) => {
+                     if (err) throw err;
+            });
                 }
         }
+
 
         //Reiniciar variables para volver a trabajar con ellas
         divisionDatosTrim="";
         divisionDatos="";
         divisionDatos = renglones[i].split(","); //separar cada dato del renglon actual.
-    
+        mensaje="";
 
         //EVALUAR QUE EL NICKNAME SEA ALFANUMERICO
         //-----------------------------------------------------------------------------------------------------------
@@ -100,6 +106,10 @@ for(let i=1;i<=contarSaltosDeLinea;i++){
         }else{
             console.log("El nickname: "+divisionDatos[0]+" NO es alfanumerico");
             //agregar al LOG el que no cumple con lo especificado
+            mensaje = "Del renglon ("+i+") el nickname: "+divisionDatos[0]+"  no es alfanumerico"; //mensaje a almacenar bien
+            fs.appendFile('informacionErronea.log', mensaje + '\n', (err) => {
+                if (err) throw err;
+            });
         }
         //------------------------------------------------------------------------------------------------------------
         
@@ -108,6 +118,7 @@ for(let i=1;i<=contarSaltosDeLinea;i++){
         divisionDatos="";
         divisionDatos = renglones[i].split(","); //separar cada dato del renglon actual.
         esNumerico=0;
+        mensaje="";
         //EVALUAR QUE LA MATRICULA SEA NUMERICA
         for(j=0;j<divisionDatos[1].length;j++){ //el bucle for revisara cada letra de matricula
             numero=divisionDatos[1].charAt(j); //almacenar cada uno de los digitos de la matricula
@@ -121,7 +132,10 @@ for(let i=1;i<=contarSaltosDeLinea;i++){
             console.log("La matricula: "+divisionDatos[1]+" SI es NUMERICA");
         }else{
             console.log("La matricula: "+divisionDatos[1]+" NO es NUMERICA");
-            //agregar al LOG el que no cumple con lo especificado
+            mensaje = "Del renglon ("+i+") la matricula: "+divisionDatos[1]+" no es numerica"; //mensaje a almacenar bien
+                    fs.appendFile('informacionErronea.log', mensaje + '\n', (err) => {
+                     if (err) throw err;
+            });
         }
         //-------------------------------------------------------------------------------------------------------------------------------
 
@@ -131,6 +145,7 @@ for(let i=1;i<=contarSaltosDeLinea;i++){
         divisionDatos = renglones[i].split(","); //separar cada dato del renglon actual.
         esNumerico=0;
         esAlfanumerico=0;
+        mensaje="";
 
         //VALIDAR QUE FACULTAD SEA UN STRING
         for(let j=0;j<divisionDatos[2].length;j++){ //el bucle for revisara cada letra de facultad
@@ -145,7 +160,10 @@ for(let i=1;i<=contarSaltosDeLinea;i++){
             console.log("La facultad: "+divisionDatos[2]+" Si es de tipo STRING.");
         }else{
             console.log("La facultad: "+divisionDatos[2]+" No es de tipo STRING");
-            //agregar al LOG el que no cumple con lo especificado
+            mensaje = "Del renglon ("+i+") la facultad: "+divisionDatos[2]+" No es de tipo STRING"; //mensaje a almacenar bien
+                    fs.appendFile('informacionErronea.log', mensaje + '\n', (err) => {
+                     if (err) throw err;
+            });
         }
         //------------------------------------------------------------------------------------------------------------------
 
@@ -158,6 +176,7 @@ for(let i=1;i<=contarSaltosDeLinea;i++){
          divisionDatos = renglones[i].split(","); //separar cada dato del renglon actual.
          esNumerico=0;
          esAlfanumerico=0;
+         mensaje="";
 
          //VALIDAR QUE CARRERA SEA UN STRING
         for(let j=0;j<divisionDatos[3].length;j++){ //el bucle for revisara cada letra de facultad
@@ -172,7 +191,10 @@ for(let i=1;i<=contarSaltosDeLinea;i++){
             console.log("La carrera: "+divisionDatos[3]+" Si es de tipo STRING.");
         }else{
             console.log("La carrera: "+divisionDatos[3]+" No es de tipo STRING");
-            //agregar al LOG el que no cumple con lo especificado
+            mensaje = "Del renglon ("+i+") la carrera: "+divisionDatos[3]+" No es de tipo STRING"; //mensaje a almacenar bien
+                    fs.appendFile('informacionErronea.log', mensaje + '\n', (err) => {
+                     if (err) throw err;
+            });
         }
         //------------------------------------------------------------------------------------------------------------
 
@@ -184,6 +206,7 @@ for(let i=1;i<=contarSaltosDeLinea;i++){
         esNumerico=0;
         esAlfanumerico=0;
         unArroba=0;
+        mensaje="";
         }
         reiniciarVariables(); //Llamando a la función para reiniciar variables y trabajar con ellas.
 
@@ -204,7 +227,10 @@ for(let i=1;i<=contarSaltosDeLinea;i++){
             console.log("El promedio: "+divisionDatos[4]+" SI es NUMERICO");
         }else{
             console.log("El promedio: "+divisionDatos[4]+" NO es NUMERICO");
-            //agregar al LOG el que no cumple con lo especificado
+            mensaje = "Del renglon ("+i+") el promedio: "+divisionDatos[4]+" No es numerico"; //mensaje a almacenar bien
+                    fs.appendFile('informacionErronea.log', mensaje + '\n', (err) => {
+                     if (err) throw err;
+            });
         }
         //-----------------------------------------------------------------------------------------------------
         
@@ -223,7 +249,10 @@ for(let i=1;i<=contarSaltosDeLinea;i++){
             console.log("La edad: "+divisionDatos[5]+" SI es Numerica Entera");
         }else{
             console.log("La edad: "+divisionDatos[5]+" NO es Numerica Entera");
-            //agregar al LOG el que no cumple con lo especificado
+            mensaje = "Del renglon ("+i+") la edad: "+divisionDatos[5]+" No es de tipo Entero"; //mensaje a almacenar bien
+            fs.appendFile('informacionErronea.log', mensaje + '\n', (err) => {
+             if (err) throw err;
+    });
         }
         //---------------------------------------------------------------------------------------------------------
         
@@ -240,19 +269,20 @@ for(let i=1;i<=contarSaltosDeLinea;i++){
             if(arroba.includes(letra)){ //un correo puede tener solo un "@"
                 unArroba++;
             }
-
         }
 
          if(divisionDatos[6].charAt(divisionDatos[6].length-1)=="."){ //un correo no puede terminar en .
                 esNumerico++;
             }
 
-
         if(esNumerico==0 && unArroba==1 ){
             console.log("El correo "+divisionDatos[6]+" SI es válido");
         }else{
             console.log("El correo: "+divisionDatos[6]+" NO es válido");
-            //agregar al LOG el que no cumple con lo especificado
+            mensaje = "Del renglon ("+i+") el correo: "+divisionDatos[6]+" no es un correo válido"; //mensaje a almacenar bien
+                    fs.appendFile('informacionErronea.log', mensaje + '\n', (err) => {
+                     if (err) throw err;
+            });
         }
     }//fin for general
     
