@@ -1,5 +1,0 @@
-nickname,matricula,facultad,carrera,promedio,edad,correo,
-pako1616665,306403,ingenieria,computacion,87.5,42,pako@uabc.edu.mx,
-pepe312412,306405s,licenciatura1,ciencias,90.5,48,al306405@uabc.edu.mx,
-juan48716,alimentos, , , , , ,
-alejandro#|,306401,ingenieria,biologia,89,24.1,al306403@uabc@.edu.mx,
